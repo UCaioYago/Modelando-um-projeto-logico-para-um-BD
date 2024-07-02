@@ -1,9 +1,8 @@
 create database ecommerce;
 use ecommerce;
 show tables;
-desc cliente;
 
--- criando a tabela Cliente --
+-- criando tabela Cliente --
 
 create table cliente(
 	idClient INT AUTO_INCREMENT,
@@ -34,14 +33,14 @@ CREATE TABLE produto(
 
 alter table produto auto_increment=1;
                     
--- Criando a tabela Pedido
+-- Criando tabela Pedido
 CREATE TABLE pedidos(
 	idPedido INT AUTO_INCREMENT,
-	idPedidoCliente INT,
+	idPedidoClient INT,
 	PedidoStatus ENUM('Cancelado', 'Confirmado', 'Em Processamento') DEFAULT 'Em Processamento',
 	PedidoDescription VARCHAR(255),
 	ShippingCost FLOAT DEFAULT 10,
-	CONSTRAINT fk_pedidos_cliente FOREIGN KEY (idPedidoCliente) references cliente(idCliente),
+	CONSTRAINT fk_pedidos_client FOREIGN KEY (idPedidoClient) references cliente(idClient),
 	PRIMARY KEY(idPedido)   
 );
 alter table pedidos auto_increment=1;
@@ -87,7 +86,7 @@ CREATE TABLE vendedor(
 alter table vendedor auto_increment=1;
 
 
--- Criando a relação M:N - Tabela produto/vendedor
+-- Criando relação M:N - Tabela produto/vendedor
 create table produtoVendedor(
 	idPvendedor INT,
 	idPproduto INT,
@@ -127,7 +126,7 @@ create table ProdutoFornecedor(
 	CONSTRAINT fk_produto_fornecedor_produto FOREIGN KEY (idPfProduto) REFERENCES produto(idProduto)
 );     
 
--- Exibindo resultados
+
 show tables;
 
 show databases;
@@ -135,12 +134,3 @@ use information_schema;
 show tables;
 desc referential_CONSTRAINTS;
 select * from referential_constraints where CONSTRAINT_SCHEMA= 'ecommerce';
-
-
-
-
-
-
-
-
-                    
